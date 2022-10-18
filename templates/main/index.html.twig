@@ -1,0 +1,62 @@
+{#{% set city = 'Ougadougou' %}#}
+{%
+    set book = {
+    'title': 'ENI Symfony',
+    'year': 2022,
+    'author': 'ENI'
+}
+%}
+{% extends 'layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        {# Affichage du nom du controlleur #}
+        <h1>Hello {{ controller_name }}! ✅</h1>
+
+        <p>Ville : {{ city|capitalize }}</p>
+
+        {#{{ dump(vegetables) }}#}
+
+        {% if city == 'Ouagadougou' %}
+            <p>Condition remplie !</p>
+        {% else %}
+            <p>Ce n'est pas Ouaga</p>
+        {% endif %}
+
+        <p>J'ai acheté {{ vegetables|length }} légumes.</p>
+
+        {# <?php foreach ($vegetables as $vegetable): ?> #}
+        {% for vegetable in vegetables %}
+            <p>
+                {{ vegetable }}
+                {% if loop.first %}
+                    (mon préféré)
+                {% endif %}
+            </p>
+        {% else %}
+            <p>Pas de légumes !</p>
+        {% endfor %}
+
+        <p>Légumes : {{ vegetables|join(',') }}</p>
+
+        <p>Titre du livre : {{ book.title }}</p>
+
+        {% for key, val in book %}
+            <p>{{ key ~ ' : ' ~ val }}</p>
+            {#<p>{{ key }} : {{ val }}</p>#}
+        {% endfor %}
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'D:/wamp64/www/series/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'D:/wamp64/www/series/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
+        </ul>
+    </div>
+{% endblock %}
