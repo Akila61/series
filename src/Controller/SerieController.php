@@ -11,14 +11,29 @@ class SerieController extends AbstractController
     #[Route('/', name: 'series_list')]
     public function list(): Response
     {
-        return $this->render('serie/index.html.twig');
+        $series = [
+            [
+                'id' => 1,
+                'title' => 'Game of thrones'
+            ],
+            [
+                 'id' => 2,
+                    'title' => 'Alias'
+            ]
+        ];
+        return $this->render('serie/index.html.twig',[
+            'series' => $series
+        ]);
     }
 
     //Route/series/1 series_details details.html.twig
     #[Route('/{id}',  name: 'series_details', requirements: ['id' => '\d+'],)]
-    public function detail(): Response
+    public function detail(int $id): Response
     {
-        return $this->render('serie/details.html.twig');
+        //TODO: Récupérer la série à afficher en BDD
+        return $this->render('serie/details.html.twig',[
+            'id' => $id
+        ]);
     }
 
 
