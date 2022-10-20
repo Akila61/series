@@ -3,8 +3,20 @@
 {% block title %}Détails d'une série{% endblock %}
 
 {% block body %}
-    <h1>Détails d'une série n° {{ id }}</h1>
 
+{#    <h1>Détails d'une série n° {{ id}}</h1>#}
+    <section class="serie-details">
+        <img src="{{ asset('uploads/posters/series/' ~ details.poster) }}" alt="{{ details.name }}">
+        <div>
+            <h1>Détails d'une série n° {{ id }}</h1>
+                <p>Overview : {{ details.overview }}</p>
+                <p>First air date : {{ details.firstAirDate | date('d/m/Y') }}</p>
+                <p>Name : {{ details.name }}</p>
+
+
+
+        </div>
+    </section>
 {% endblock %}
 
 
