@@ -39,6 +39,51 @@ class SerieRepository extends ServiceEntityRepository
         }
     }
 
+        public function findAllBeetwenYear(\DateTime $start, \DateTime $end): array
+        {
+            //DQL
+//        $entityManager =$this->getEntityManager();
+//        $dql =  " SELECT s FROM App\Entity\Serie s
+//                  WHERE s.firstAirDate >'2019-01-01'
+//                  AND s.firstAirDate < '2020-01-01' ";
+//        $query = $entityManager->createQuery($dql);
+//
+//        return $query->getResult();
+
+            //QueryBuilder
+            $qb = $this->createQueryBuilder('s');
+            $qb->andWhere("s.firstAirDate >= :start")
+               ->andWhere("s.firstAirDate <= :end")
+                ->setParameter('start', $start)
+                ->setParameter('end', $end);
+
+        return $qb->getQuery()->getResult();
+
+        }
+
+//*******************************************************************************************************
+        //Autre synthaxe possible :
+
+//    public function  findAllByYear(int $year): array
+//    {
+        //DQL
+//        $entityManager =$this->getEntityManager();
+//        $dql =  " SELECT s FROM App\Entity\Serie s
+//                  WHERE s.firstAirDate >'2019-01-01'
+//                  AND s.firstAirDate < '2020-01-01' ";
+//        $query = $entityManager->createQuery($dql);
+//
+//        return $query->getResult();
+
+        //QueryBuilder
+//        $qb = $this->createQueryBuilder('s');
+//        $qb -> andWhere("s.firstAirDate > '$year.01.01'") // autre syntaxe : $qb->andWhere($qb->expr(gte('s.firstAirDate', '2019-01-01'))
+//            -> andWhere("s.firstAirDate < '$year.12.31'") //autre synthaxe : andWhere("s.firstAirDate < '$year.12.31'");
+//            -> setParameter()
+//
+//        return $qb->getQuery() ->getResult();
+
+//    }
 //    /**
 //     * @return Serie[] Returns an array of Serie objects
 //     */
@@ -63,4 +108,5 @@ class SerieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+    }
+

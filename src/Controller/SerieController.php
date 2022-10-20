@@ -7,6 +7,7 @@ use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 #[Route('/series')]
 class SerieController extends AbstractController
 {
@@ -15,10 +16,13 @@ class SerieController extends AbstractController
     {
         //Récupérer les séries dans la BDD :
 //        $series = $serieRepository->findAll();
-        $series = $serieRepository->findBy(array(),array('firstAirDate' => 'DESC', 'name'=> 'ASC'));
-        return $this->render('serie/index.html.twig',[
-            'series' => $series
-        ]);
+//        $series = $serieRepository->findBy(array(),array('firstAirDate' => 'DESC', 'name'=> 'ASC'));
+//        $series = $serieRepository->findAllByYear(2019);
+
+        $series = $serieRepository->findAllBeetwenYear(new \DateTime('2019-01-01'), new \DateTime('2020-01-01'));
+            return $this->render('serie/index.html.twig',[
+                'series' => $series
+            ]);
     }
 
     //Route/series/1 series_details details.html.twig
@@ -41,9 +45,6 @@ class SerieController extends AbstractController
 //            'details' => $serie
 //        ]);
     }
-
-
-
 
     //Route/series/new series_new new.html.twig
     #[Route('/new', name: 'series_new')]
