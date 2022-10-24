@@ -50,6 +50,7 @@ nav ul {
     list-style: none;
     padding-left: 0;
 }
+
 .series-list {
     display: grid;
     grid-gap: 10px;
@@ -64,6 +65,23 @@ nav ul {
 
 .serie-details-infos > div {
     margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+}
+
+.form-row {
+    margin-bottom: 1rem;
+}
+.flash{
+    padding: 1rem;
+}
+.flash-success {
+    background-color: lightgreen;
+}
+.flash-error {
+    background-color: indianred;
 }
 
 @media screen and (min-width: 700px) {

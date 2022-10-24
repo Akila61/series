@@ -4,6 +4,25 @@
 
 {% block body %}
     <h1>Création d'une série</h1>
+
+
+    {# Méthode pour la mise en forme de la page HTML peut pratique à utiliser :
+    <div>
+        <div>
+            {{ form_label(serieForm.name) }}
+        </div>
+        {{ form_widget(serieForm.name) }}
+        {{ form_errors(serieForm.name) }}
+        <br>
+        <br>
+    </div>
+    #}
+    {{ form_start(serieForm)}}
+            {{ form_widget(serieForm) }}
+             <button>Ajouter</button>
+
+    {{ form_end(serieForm) }}
+
 {% endblock %}
 
 
