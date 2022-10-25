@@ -12,9 +12,11 @@
                 <p>Overview : {{ details.overview }}</p>
                 <p>First air date : {{ details.firstAirDate | date('d/m/Y') }}</p>
                 <p>Name : {{ details.name }}</p>
-
-
-
+                {% for season in details.seasons%}
+                    <article>
+                        {{ season.number }}
+                    </article>
+                {% endfor %}
         </div>
     </section>
 {% endblock %}
