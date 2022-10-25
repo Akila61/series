@@ -19,9 +19,9 @@ class SerieController extends AbstractController
     {
         //Récupérer les séries dans la BDD :
 //        $series = $serieRepository->findAll();
-        $series = $serieRepository->findBy(array(),array('firstAirDate' => 'DESC', 'name'=> 'ASC'));
+ //       $series = $serieRepository->findBy(array(),array('firstAirDate' => 'DESC', 'name'=> 'ASC'));
 //        $series = $serieRepository->findAllByYear(2019);
-
+             $series = $serieRepository->findAllWithSeasons();
        // $series = $serieRepository->findAllBeetwenYear(new \DateTime('2019-01-01'), new \DateTime('2020-01-01'));
             return $this->render('serie/index.html.twig',[
                 'series' => $series

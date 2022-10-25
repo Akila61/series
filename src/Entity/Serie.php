@@ -72,7 +72,7 @@ class Serie
     private ?\DateTimeInterface $dateModified = null;
 
     //On créé le lien permettant aux séries de récupérer les saisons.
-    #[ORM\OneToMany( mappedBy: 'serie', targetEntity: Season::class, orphanRemoval: true)]
+    #[ORM\OneToMany( mappedBy: 'serie', targetEntity: Season::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $seasons;
 
     //On doit initialiser les constructeurs car nous sommes dans une class
@@ -273,5 +273,10 @@ class Serie
         $this->dateModified = $dateModified;
 
         return $this;
+    }
+    //Méthode de dépannage rapide
+    public function __toString(): string
+    {
+       return $this->getName();
     }
 }
