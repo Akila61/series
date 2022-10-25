@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SerieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -69,10 +71,53 @@ class Serie
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateModified = null;
 
+    //On créé le lien permettant aux séries de récupérer les saisons.
+    #[ORM\OneToMany( mappedBy: 'serie', targetEntity: Season::class, orphanRemoval: true)]
+    private Collection $seasons;
+
+    //On doit initialiser les constructeurs car nous sommes dans une class
+    public function __construct(){
+
+        $this->seasons = new ArrayCollection();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    public function getSeasons(): Collection
+    {
+        return $this->seasons;
+    }
+
+    public function setSeasons(Collection $seasons): Serie
+    {
+        $this->seasons = $seasons;
+        return $this;
+    }
+    public function addSeason(Season $season): self{
+
+        if ($this->getSeasons()->contains($season)){
+            $this->seasons->add($season);
+            $season->setSerie($this);
+        }
+        return $this;
+    }
+    public  function removeSeason(Season $season): self{
+
+        if ($this->getSeasons()->removeElement($season)){
+            if($season->getSerie()===$this){
+                $season->setSerie(null);
+            }
+            return $this;
+        }
+
+
+    }
+
+
 
     public function getName(): ?string
     {
