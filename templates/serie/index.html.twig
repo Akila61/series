@@ -2,10 +2,14 @@
 
 {% block title %}Liste des séries{% endblock %}
 
-{% block body %}<h1>Liste de séries</h1>
+{% block body %}
+    <h1>Liste de séries</h1>
 
-    <a href="{{ path('series_new') }}">Ajouter une série</a>
-    <a href="{{ path('season_create') }}">Ajouter une saison</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('series_new') }}">Ajouter une série</a>
+        <a href="{{ path('season_create') }}">Ajouter une saison</a>
+    {% endif %}
+
 
     <section class="series-list">
         {% for serie in series %}
