@@ -65,13 +65,15 @@ class Serie
     #[ORM\Column]
     private ?int $tmdbId = null;
 
+    #[Assert\LessThan('tomorrow')] //sert à indiquer que la date doit être au plus tard aujourd'hui
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreated = null;
 
+    #[Assert\LessThan('tomorrow')] //sert à indiquer que la date doit être au plus tard aujourd'hui
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateModified = null;
 
-    //On créé le lien permettant aux séries de récupérer les saisons.
+    //On créait le lien permettant aux séries de récupérer les saisons.
     #[ORM\OneToMany( mappedBy: 'serie', targetEntity: Season::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $seasons;
 
